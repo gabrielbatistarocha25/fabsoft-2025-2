@@ -95,10 +95,10 @@ classDiagram
         +deviceModel: DeviceModel
     }
 
-    Location "1" -- "0..*" Site : contains
-    Site "1" -- "0..*" Rack : contains
-    Site "1" -- "0..*" Device : contains
-    Site "1" -- "0..*" Vlan : contains
-    Manufacturer "1" -- "0..*" DeviceModel : produces
-    DeviceModel "1" -- "0..*" Device : is model for
-    Rack "1" -- "0..*" Device : houses
+    Location "1" -- "0..*" Site
+    Site "1" -- "0..*" Rack
+    Site "1" -- "0..*" Device
+    Site "1" -- "0..*" Vlan
+    Manufacturer "1" -- "0..*" DeviceModel
+    DeviceModel "1" -- "0..*" Device
+    Rack "1" -- "0..*" Device
