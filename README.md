@@ -38,3 +38,67 @@ Aceitação:
 Deve ser possível buscar redes por nome, endereço IP, VLAN ou máscara.
 O sistema deve exibir informações associadas: dispositivos conectados, racks e circuitos utilizados.
 A consulta deve permitir exportar os resultados em PDF ou CSV.
+
+
+```mermaid
+classDiagram
+    class Location {
+        -id: Long
+        -name: String
+        -address: String
+        +sites: List~Site~
+    }
+
+    class Site {
+        -id: Long
+        -name: String
+        +location: Location
+        +racks: List~Rack~
+        +devices: List~Device~
+        +vlans: List~Vlan~
+    }
+
+    class Rack {
+        -id: Long
+        -name: String
+        -uHeight: int
+        +site: Site
+        +devices: List~Device~
+    }
+
+    class Vlan {
+        -id: Long
+        -vlanId: int
+        -name: String
+        +site: Site
+    }
+
+    class Manufacturer {
+        -id: Long
+        -name: String
+        +deviceModels: List~DeviceModel~
+    }
+
+    class DeviceModel {
+        -id: Long
+        -name: String
+        +manufacturer: Manufacturer
+        +devices: List~Device~
+    }
+
+    class Device {
+        -id: Long
+        -name: String
+        -position: int
+        +site: Site
+        +rack: Rack
+        +deviceModel: DeviceModel
+    }
+
+    Location "1" -- "0..*" Site : contains
+    Site "1" -- "0..*" Rack : contains
+    Site "1" -- "0..*" Device : contains
+    Site "1" -- "0..*" Vlan : contains
+    Manufacturer "1" -- "0..*" DeviceModel : produces
+    DeviceModel "1" -- "0..*" Device : is model for
+    Rack "1" -- "0..*" Device : houses
