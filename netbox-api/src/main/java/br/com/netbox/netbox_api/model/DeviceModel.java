@@ -1,10 +1,9 @@
 package br.com.netbox.netbox_api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
-import java.util.List; // Importar List
+import java.util.List;
 
 @Entity
 public class DeviceModel {
@@ -12,17 +11,16 @@ public class DeviceModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "O nome do modelo é obrigatório")
     private String name;
 
+    // Lado "filho" da relação. Será omitido no JSON para evitar loops.
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturer_id", nullable = false)
+    @JoinColumn(name = "manufacturer_id")
+    @JsonBackReference("manufacturer-models")
     private Manufacturer manufacturer;
 
-    // A CORREÇÃO ESTÁ AQUI
-    @OneToMany(mappedBy = "deviceModel", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("model-devices") // Lado principal da relação com Device
+    @OneToMany(mappedBy = "deviceModel")
+    @JsonManagedReference("model-devices")
     private List<Device> devices;
 
     // Getters e Setters
@@ -35,3 +33,4 @@ public class DeviceModel {
     public List<Device> getDevices() { return devices; }
     public void setDevices(List<Device> devices) { this.devices = devices; }
 }
+
