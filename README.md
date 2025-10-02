@@ -39,7 +39,6 @@ Deve ser possível buscar redes por nome, endereço IP, VLAN ou máscara.
 O sistema deve exibir informações associadas: dispositivos conectados, racks e circuitos utilizados.
 A consulta deve permitir exportar os resultados em PDF ou CSV.
 
-
 ```mermaid
 classDiagram
     class Location {

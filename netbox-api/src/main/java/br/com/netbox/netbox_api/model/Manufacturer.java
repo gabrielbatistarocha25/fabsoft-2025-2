@@ -11,12 +11,10 @@ public class Manufacturer {
     private Long id;
     private String name;
 
-    // Lado "pai" da relação. Será incluído no JSON.
     @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("manufacturer-models")
     private List<DeviceModel> deviceModels;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

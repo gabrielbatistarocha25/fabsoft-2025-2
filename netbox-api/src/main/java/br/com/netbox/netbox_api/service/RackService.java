@@ -22,16 +22,13 @@ public class RackService {
     }
 
     public Rack createRack(Rack rack) {
-        // VALIDAÇÃO ADICIONADA: Verifica se o objeto 'site' e seu 'id' foram fornecidos.
         if (rack.getSite() == null || rack.getSite().getId() == null) {
             throw new IllegalArgumentException("O ID do Site é obrigatório para criar um Rack.");
         }
 
-        // Garante que o site associado ao rack realmente existe no banco de dados
         Site site = siteRepository.findById(rack.getSite().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Site com id " + rack.getSite().getId() + " não encontrado."));
 
-        // Associa o objeto 'site' gerenciado pelo JPA antes de salvar
         rack.setSite(site);
         return rackRepository.save(rack);
     }

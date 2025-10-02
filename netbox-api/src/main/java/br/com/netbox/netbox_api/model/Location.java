@@ -17,7 +17,6 @@ public class Location {
     @JsonManagedReference("location-sites")
     private List<Site> sites;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

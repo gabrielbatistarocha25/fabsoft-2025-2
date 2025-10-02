@@ -30,7 +30,6 @@ public class Site {
     @JsonManagedReference("site-devices")
     private List<Device> devices;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

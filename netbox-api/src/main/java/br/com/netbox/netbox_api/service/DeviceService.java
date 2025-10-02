@@ -35,7 +35,6 @@ public class DeviceService {
     }
 
     public DeviceModel createDeviceModel(DeviceModel deviceModel) {
-        // Valida se o fabricante existe
         manufacturerRepository.findById(deviceModel.getManufacturer().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Fabricante com id " + deviceModel.getManufacturer().getId() + " não encontrado."));
         return deviceModelRepository.save(deviceModel);
@@ -46,7 +45,6 @@ public class DeviceService {
     }
 
     public Device createDevice(Device device) {
-        // Valida se as entidades associadas existem
         siteRepository.findById(device.getSite().getId())
                 .orElseThrow(() -> new EntityNotFoundException("Site com id " + device.getSite().getId() + " não encontrado."));
         deviceModelRepository.findById(device.getDeviceModel().getId())
@@ -62,7 +60,6 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
-    // A CORREÇÃO ESTÁ AQUI: Adiciona a lógica para a consulta
     public List<Device> getDevicesBySite(Long siteId) {
         if (!siteRepository.existsById(siteId)) {
             throw new EntityNotFoundException("Site com id " + siteId + " não encontrado.");

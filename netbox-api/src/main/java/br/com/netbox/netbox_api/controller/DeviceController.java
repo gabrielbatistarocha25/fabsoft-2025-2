@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api") // Mapeamento base para todos os endpoints neste controlador
+@RequestMapping("/api")
 public class DeviceController {
 
     private final DeviceService deviceService;
@@ -21,7 +21,6 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    // --- Endpoints para Manufacturer ---
     @PostMapping("/manufacturers")
     public ResponseEntity<Manufacturer> createManufacturer(@Valid @RequestBody Manufacturer manufacturer) {
         return new ResponseEntity<>(deviceService.createManufacturer(manufacturer), HttpStatus.CREATED);
@@ -32,7 +31,6 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getAllManufacturers());
     }
 
-    // --- Endpoints para DeviceModel ---
     @PostMapping("/device-models")
     public ResponseEntity<DeviceModel> createDeviceModel(@Valid @RequestBody DeviceModel deviceModel) {
         return new ResponseEntity<>(deviceService.createDeviceModel(deviceModel), HttpStatus.CREATED);
@@ -43,7 +41,6 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getAllDeviceModels());
     }
 
-    // --- Endpoints para Device ---
     @PostMapping("/devices")
     public ResponseEntity<Device> createDevice(@Valid @RequestBody Device device) {
         return new ResponseEntity<>(deviceService.createDevice(device), HttpStatus.CREATED);
@@ -54,7 +51,6 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getAllDevices());
     }
 
-    // A CORREÇÃO ESTÁ AQUI: O caminho correto para a consulta
     @GetMapping("/sites/{siteId}/devices")
     public ResponseEntity<List<Device>> getDevicesBySite(@PathVariable Long siteId) {
         List<Device> devices = deviceService.getDevicesBySite(siteId);

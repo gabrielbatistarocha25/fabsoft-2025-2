@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface VlanRepository extends JpaRepository<Vlan, Long> {
 
-    // Método para encontrar todas as VLANs associadas a um ID de site específico
     List<Vlan> findBySiteId(Long siteId);
 }
 

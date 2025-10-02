@@ -13,7 +13,6 @@ public class DeviceModel {
     private Long id;
     private String name;
 
-    // Lado "filho" da relação. Será omitido no JSON para evitar loops.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
     @JsonBackReference("manufacturer-models")
@@ -23,7 +22,6 @@ public class DeviceModel {
     @JsonManagedReference("model-devices")
     private List<Device> devices;
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }

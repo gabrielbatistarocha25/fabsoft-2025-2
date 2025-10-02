@@ -17,7 +17,6 @@ public class Vlan {
     @JsonBackReference("site-vlans")
     private Site site;
     
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Integer getVlanId() { return vlanId; }

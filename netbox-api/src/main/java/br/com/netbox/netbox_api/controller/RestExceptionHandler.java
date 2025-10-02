@@ -13,11 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import jakarta.persistence.EntityNotFoundException;
 
-// Anotação que permite a esta classe manipular exceções de forma global para todos os controllers
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    // Manipulador para a exceção EntityNotFoundException (ex: buscar um item que não existe)
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -30,7 +28,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    // Manipulador para a exceção IllegalArgumentException (ex: enviar dados inválidos)
     @ExceptionHandler(IllegalArgumentException.class)
     protected ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
