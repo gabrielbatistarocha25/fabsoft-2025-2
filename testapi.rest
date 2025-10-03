@@ -1,0 +1,115 @@
+@baseUrl = http://localhost:8080/api
+
+# Teste 1.1: Criar a Localização Física (Location)
+POST {{baseUrl}}/organization/locations
+Content-Type: application/json
+
+{
+    "name": "Data Center Principal - Joinville",
+    "address": "Rua das Máquinas, 123, Joinville"
+}
+
+###
+# Teste 1.2: Criar o Site
+POST {{baseUrl}}/organization/sites
+Content-Type: application/json
+
+{
+    "name": "JVE-MATRIZ-01",
+    "location": {
+        "id": 1
+    }
+}
+
+###
+# Teste 2.1: Criar um Fabricante (Manufacturer)
+POST {{baseUrl}}/manufacturers
+Content-Type: application/json
+
+{
+    "name": "Cisco"
+}
+
+###
+# Teste 2.2: Criar um Modelo de Dispositivo (Device Model)
+POST {{baseUrl}}/device-models
+Content-Type: application/json
+
+{
+    "name": "Catalyst 9300",
+    "manufacturer": {
+        "id": 1
+    }
+}
+
+###
+# Teste 3.1: Criar um Rack
+POST {{baseUrl}}/racks
+Content-Type: application/json
+
+{
+    "name": "RACK-A01",
+    "uHeight": 42,
+    "site": {
+        "id": 1
+    }
+}
+
+###
+# Teste 3.2: Criar uma VLAN
+POST {{baseUrl}}/vlans
+Content-Type: application/json
+
+{
+    "name": "VLAN-SERVIDORES-PROD",
+    "vlanId": 10,
+    "site": {
+        "id": 1
+    }
+}
+
+###
+# Teste 4.1: Criar um Dispositivo (Device)
+POST {{baseUrl}}/devices
+Content-Type: application/json
+
+{
+    "name": "SW-CORE-01",
+    "site": {
+        "id": 1
+    },
+    "deviceModel": {
+        "id": 1
+    },
+    "rack": {
+        "id": 1
+    },
+    "position": 20
+}
+
+###
+# Teste 5.1: Consultar Dispositivos de um Site
+GET {{baseUrl}}/sites/1/devices
+
+###
+# Teste 5.2: Testar Erro de "Não Encontrado" (404)
+POST {{baseUrl}}/racks
+Content-Type: application/json
+
+{
+    "name": "RACK-DO-GOOGLE",
+    "uHeight": 42,
+    "site": {
+        "id": 999
+    }
+}
+
+###
+# Teste 5.3: Testar Erro de "Requisição Inválida" (400)
+POST {{baseUrl}}/vlans
+Content-Type: application/json
+
+{
+    "vlanId": 99,
+    "name": "VLAN-SEM-SITE"
+}
