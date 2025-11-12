@@ -1,0 +1,21 @@
+<div class="container mt-3">
+    <h2>Localizações</h2>
+    <button class="btn btn-primary mb-3" (click)="novo()">Nova Localização</button>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listaLocations">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
