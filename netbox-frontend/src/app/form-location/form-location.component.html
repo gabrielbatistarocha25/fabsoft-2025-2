@@ -1,13 +1,19 @@
-<div class="container mt-3">
-    <h2>Cadastro de Localização</h2>
-    <div class="mb-3">
-        <label class="form-label">Nome:</label>
-        <input type="text" class="form-control" [(ngModel)]="location.name" name="name">
+<div class="container mt-4">
+  <h2>{{ location.id ? 'Editar' : 'Nova' }} Localização</h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="location.name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Endereço</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="location.address" name="address">
+      </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Endereço:</label>
-        <input type="text" class="form-control" [(ngModel)]="location.address" name="address">
+    <div class="card-footer">
+      <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
     </div>
-    <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
-    <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+  </div>
 </div>

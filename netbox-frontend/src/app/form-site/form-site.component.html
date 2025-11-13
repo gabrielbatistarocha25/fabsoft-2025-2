@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2>{{ site.id ? 'Editar' : 'Novo' }} Site</h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="site.name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Localização</label>
+        <select class="form-select" id="location" [(ngModel)]="site.location.id" name="location">
+          <option [ngValue]="null">Selecione uma Localização</option>
+          <option *ngFor="let loc of locations" [value]="loc.id">{{ loc.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>

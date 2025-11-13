@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h2>{{ vlan.id ? 'Editar' : 'Nova' }} VLAN</h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="vlan.name" name="name">
+      </div>
+      <div class="mb-3">
+        <label for="vlanId" class="form-label">VLAN ID</label>
+        <input type="number" class="form-control" id="vlanId" [(ngModel)]="vlan.vlanId" name="vlanId">
+      </div>
+      <div class="mb-3">
+        <label for="site" class="form-label">Site</label>
+        <select class="form-select" id="site" [(ngModel)]="vlan.site.id" name="site">
+          <option [ngValue]="null">Selecione um Site</option>
+          <option *ngFor="let item of sites" [value]="item.id">{{ item.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>

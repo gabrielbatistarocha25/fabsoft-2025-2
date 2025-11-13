@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2>{{ device.id ? 'Editar' : 'Novo' }} Dispositivo</h2>
+  <div class="card">
+    <div class="card-body">
+      
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="device.name" name="name">
+      </div>
+      
+      <div class="mb-3">
+        <label for="site" class="form-label">Site</label>
+        <select class="form-select" id="site" [(ngModel)]="device.site.id" name="site" required>
+          <option [ngValue]="null">Selecione um Site</option>
+          <option *ngFor="let item of sites" [value]="item.id">{{ item.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="deviceModel" class="form-label">Modelo</label>
+        <select class="form-select" id="deviceModel" [(ngModel)]="device.deviceModel.id" name="deviceModel" required>
+          <option [ngValue]="null">Selecione um Modelo</option>
+          <option *ngFor="let item of deviceModels" [value]="item.id">{{ item.manufacturer.name }} - {{ item.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="rack" class="form-label">Rack (Opcional)</label>
+        <select class="form-select" id="rack" [(ngModel)]="device.rack.id" name="rack">
+          <option [ngValue]="null">Nenhum (Fora do Rack)</option>
+          <option *ngFor="let item of racks" [value]="item.id">{{ item.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="position" class="form-label">Posição (U)</label>
+        <input type="number" class="form-control" id="position" [(ngModel)]="device.position" name="position">
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>

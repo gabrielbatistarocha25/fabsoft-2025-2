@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '../model/location';
 import { LocationService } from '../service/location.service';
 
@@ -12,18 +12,25 @@ import { LocationService } from '../service/location.service';
   templateUrl: './form-location.component.html',
   styleUrls: ['./form-location.component.css']
 })
-export class FormLocationComponent {
+export class FormLocationComponent implements OnInit {
   location: Location = new Location();
+  
+  constructor(
+    private service: LocationService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  constructor(private service: LocationService, private router: Router) {}
-
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.service.getLocationById(+id).subscribe(data => this.location = data);
+    }
+  }
   salvar() {
     this.service.saveLocation(this.location).subscribe(() => {
       this.router.navigate(['/locations']);
     });
   }
-
-  cancelar() {
-      this.router.navigate(['/locations']);
-  }
+  cancelar() { this.router.navigate(['/locations']); }
 }

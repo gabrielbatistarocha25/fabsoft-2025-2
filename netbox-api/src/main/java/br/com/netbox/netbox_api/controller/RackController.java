@@ -1,16 +1,9 @@
 package br.com.netbox.netbox_api.controller;
 
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*; // Importação alterada para wildcard
 import br.com.netbox.netbox_api.model.Rack;
 import br.com.netbox.netbox_api.service.RackService;
 import jakarta.validation.Valid;
@@ -38,5 +31,16 @@ public class RackController {
     @GetMapping("/{id}")
     public ResponseEntity<Rack> getRackById(@PathVariable Long id) {
         return ResponseEntity.ok(rackService.getRackById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Rack> updateRack(@PathVariable Long id, @Valid @RequestBody Rack rackDetails) {
+        return ResponseEntity.ok(rackService.updateRack(id, rackDetails));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRack(@PathVariable Long id) {
+        rackService.deleteRack(id);
+        return ResponseEntity.noContent().build();
     }
 }

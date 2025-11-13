@@ -21,6 +21,7 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
+
     @PostMapping("/manufacturers")
     public ResponseEntity<Manufacturer> createManufacturer(@Valid @RequestBody Manufacturer manufacturer) {
         return new ResponseEntity<>(deviceService.createManufacturer(manufacturer), HttpStatus.CREATED);
@@ -30,6 +31,23 @@ public class DeviceController {
     public ResponseEntity<List<Manufacturer>> getAllManufacturers() {
         return ResponseEntity.ok(deviceService.getAllManufacturers());
     }
+
+    @GetMapping("/manufacturers/{id}")
+    public ResponseEntity<Manufacturer> getManufacturerById(@PathVariable Long id) {
+        return ResponseEntity.ok(deviceService.getManufacturerById(id));
+    }
+
+    @PutMapping("/manufacturers/{id}")
+    public ResponseEntity<Manufacturer> updateManufacturer(@PathVariable Long id, @Valid @RequestBody Manufacturer manufacturerDetails) {
+        return ResponseEntity.ok(deviceService.updateManufacturer(id, manufacturerDetails));
+    }
+
+    @DeleteMapping("/manufacturers/{id}")
+    public ResponseEntity<Void> deleteManufacturer(@PathVariable Long id) {
+        deviceService.deleteManufacturer(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
     @PostMapping("/device-models")
     public ResponseEntity<DeviceModel> createDeviceModel(@Valid @RequestBody DeviceModel deviceModel) {
@@ -41,6 +59,23 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getAllDeviceModels());
     }
 
+    @GetMapping("/device-models/{id}")
+    public ResponseEntity<DeviceModel> getDeviceModelById(@PathVariable Long id) {
+        return ResponseEntity.ok(deviceService.getDeviceModelById(id));
+    }
+
+    @PutMapping("/device-models/{id}")
+    public ResponseEntity<DeviceModel> updateDeviceModel(@PathVariable Long id, @Valid @RequestBody DeviceModel modelDetails) {
+        return ResponseEntity.ok(deviceService.updateDeviceModel(id, modelDetails));
+    }
+
+    @DeleteMapping("/device-models/{id}")
+    public ResponseEntity<Void> deleteDeviceModel(@PathVariable Long id) {
+        deviceService.deleteDeviceModel(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
     @PostMapping("/devices")
     public ResponseEntity<Device> createDevice(@Valid @RequestBody Device device) {
         return new ResponseEntity<>(deviceService.createDevice(device), HttpStatus.CREATED);
@@ -51,10 +86,25 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getAllDevices());
     }
 
+    @GetMapping("/devices/{id}")
+    public ResponseEntity<Device> getDeviceById(@PathVariable Long id) {
+        return ResponseEntity.ok(deviceService.getDeviceById(id));
+    }
+
+    @PutMapping("/devices/{id}")
+    public ResponseEntity<Device> updateDevice(@PathVariable Long id, @Valid @RequestBody Device deviceDetails) {
+        return ResponseEntity.ok(deviceService.updateDevice(id, deviceDetails));
+    }
+
+    @DeleteMapping("/devices/{id}")
+    public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
+        deviceService.deleteDevice(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/sites/{siteId}/devices")
     public ResponseEntity<List<Device>> getDevicesBySite(@PathVariable Long siteId) {
         List<Device> devices = deviceService.getDevicesBySite(siteId);
         return ResponseEntity.ok(devices);
     }
 }
-
