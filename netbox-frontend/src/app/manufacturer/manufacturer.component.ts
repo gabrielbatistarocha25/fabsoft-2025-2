@@ -20,8 +20,15 @@ export class ManufacturerComponent implements OnInit {
 
   constructor(private service: ManufacturerService, private router: Router) {}
   
-  ngOnInit(): void { this.carregarLista(); }
-  ngAfterViewInit(): void { this.modal = new bootstrap.Modal(this.modalElement.nativeElement); }
+  ngOnInit(): void { 
+    this.carregarLista(); 
+  }
+  
+  // CORREÇÃO: Mova a inicialização do modal para esta função
+  ngAfterViewInit(): void { 
+    this.modal = new bootstrap.Modal(this.modalElement.nativeElement); 
+  }
+  
   carregarLista() { this.service.getManufacturers().subscribe(data => this.lista = data); }
   novo() { this.router.navigate(['/manufacturers/novo']); }
   alterar(m: Manufacturer) { this.router.navigate(['/manufacturers/alterar', m.id]); }

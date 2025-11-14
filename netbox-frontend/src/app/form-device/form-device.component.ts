@@ -14,21 +14,25 @@ import { DeviceModelService } from '../service/device-model.service';
 @Component({
   selector: 'app-form-device',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule], // <-- Note que formulários precisam de CommonModule e FormsModule
   templateUrl: './form-device.component.html',
   styleUrls: ['./form-device.component.css']
 })
 export class FormDeviceComponent implements OnInit {
+  
+  // PARTE QUE FALTOU VOCÊ COPIAR:
   device: Device = new Device();
   sites: Site[] = [];
   racks: Rack[] = [];
   deviceModels: DeviceModel[] = [];
   
   constructor(
+    // PARTE QUE FALTOU VOCÊ COPIAR:
     private deviceService: DeviceService,
     private siteService: SiteService,
     private rackService: RackService,
     private deviceModelService: DeviceModelService,
+    
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -43,7 +47,6 @@ export class FormDeviceComponent implements OnInit {
     if (id) {
       this.deviceService.getDeviceById(+id).subscribe(data => {
         this.device = data;
-        // Garante que o rack não seja nulo se não houver um
         if (!this.device.rack) {
           this.device.rack = new Rack();
         }
@@ -52,8 +55,7 @@ export class FormDeviceComponent implements OnInit {
   }
 
   salvar() {
-    // Se o ID do rack for nulo/undefined, envia o objeto device.rack como nulo
-    if (!this.device.rack.id) {
+    if (this.device.rack && !this.device.rack.id) {
       this.device.rack = null as any; 
     }
     

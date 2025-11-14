@@ -20,8 +20,15 @@ export class RackComponent implements OnInit {
 
   constructor(private service: RackService, private router: Router) {}
   
-  ngOnInit(): void { this.carregarLista(); }
-  ngAfterViewInit(): void { this.modal = new bootstrap.Modal(this.modalElement.nativeElement); }
+  ngOnInit(): void { 
+    this.carregarLista(); 
+  }
+
+  // CORREÇÃO: Mova a inicialização do modal para esta função
+  ngAfterViewInit(): void { 
+    this.modal = new bootstrap.Modal(this.modalElement.nativeElement); 
+  }
+
   carregarLista() { this.service.getRacks().subscribe(data => this.lista = data); }
   novo() { this.router.navigate(['/racks/novo']); }
   alterar(item: Rack) { this.router.navigate(['/racks/alterar', item.id]); }

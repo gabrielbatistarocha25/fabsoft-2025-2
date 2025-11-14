@@ -24,8 +24,8 @@ export class LocationComponent implements OnInit {
     this.carregarLista();
   }
 
+  // CORREÇÃO: Mova a inicialização do modal para esta função
   ngAfterViewInit(): void {
-    // Inicializa o modal DEPOIS que o ViewChild está disponível
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
   }
 

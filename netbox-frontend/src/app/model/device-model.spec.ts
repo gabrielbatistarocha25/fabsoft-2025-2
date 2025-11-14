@@ -1,4 +1,4 @@
-import { DeviceModel } from './device-model.model';
+import { DeviceModel } from './device-model';
 
 describe('DeviceModel', () => {
   it('should create an instance', () => {
