@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*; // Importação alterada para 
 import br.com.netbox.netbox_api.model.Rack;
 import br.com.netbox.netbox_api.service.RackService;
 import jakarta.validation.Valid;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 
+//@CrossOrigin("https://glowing-bassoon-v65944vpw9j73x9g-4200.app.github.dev/")
 @RestController
 @RequestMapping("/api/racks")
 public class RackController {

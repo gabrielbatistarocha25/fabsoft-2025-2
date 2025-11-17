@@ -24,16 +24,19 @@ export class ManufacturerComponent implements OnInit {
     this.carregarLista(); 
   }
   
-  // CORREÇÃO: Mova a inicialização do modal para esta função
   ngAfterViewInit(): void { 
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement); 
   }
   
-  carregarLista() { this.service.getManufacturers().subscribe(data => this.lista = data); }
+  carregarLista() { 
+    this.service.getManufacturers().subscribe(data => this.lista = data); 
+  }
+
   novo() { this.router.navigate(['/manufacturers/novo']); }
   alterar(m: Manufacturer) { this.router.navigate(['/manufacturers/alterar', m.id]); }
   abrirConfirmacao(m: Manufacturer) { this.selecionado = m; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteManufacturer(this.selecionado.id).subscribe(() => {
       this.carregarLista();

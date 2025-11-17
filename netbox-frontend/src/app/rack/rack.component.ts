@@ -24,7 +24,6 @@ export class RackComponent implements OnInit {
     this.carregarLista(); 
   }
 
-  // CORREÇÃO: Mova a inicialização do modal para esta função
   ngAfterViewInit(): void { 
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement); 
   }
@@ -34,6 +33,7 @@ export class RackComponent implements OnInit {
   alterar(item: Rack) { this.router.navigate(['/racks/alterar', item.id]); }
   abrirConfirmacao(item: Rack) { this.selecionado = item; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteRack(this.selecionado.id).subscribe(() => {
       this.carregarLista();

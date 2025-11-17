@@ -22,11 +22,16 @@ export class VlanComponent implements OnInit {
   
   ngOnInit(): void { this.carregarLista(); }
   ngAfterViewInit(): void { this.modal = new bootstrap.Modal(this.modalElement.nativeElement); }
-  carregarLista() { this.service.getVlans().subscribe(data => this.lista = data); }
+  
+  carregarLista() { 
+    this.service.getVlans().subscribe(data => this.lista = data); 
+  }
+  
   novo() { this.router.navigate(['/vlans/novo']); }
   alterar(item: Vlan) { this.router.navigate(['/vlans/alterar', item.id]); }
   abrirConfirmacao(item: Vlan) { this.selecionado = item; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteVlan(this.selecionado.id).subscribe(() => {
       this.carregarLista();

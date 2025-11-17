@@ -7,8 +7,8 @@ import { Location } from '../model/location';
   providedIn: 'root'
 })
 export class LocationService {
-  // URL da sua API backend
-  private readonly apiURL = 'http://localhost:8080/api/organization/locations';
+  
+  private readonly apiURL = 'https://glowing-bassoon-v65944vpw9j73x9g-8080.app.github.dev/api/organization/locations';
 
   constructor(private http: HttpClient) {}
 
@@ -23,13 +23,10 @@ export class LocationService {
     return this.http.post<Location>(this.apiURL, location);
   }
 
-  // Nota: Adicionei este método caso precise editar. Se sua API não tiver, precisará criar no backend.
   getLocationById(id: number): Observable<Location> {
-     // Supondo que sua API suporte GET /api/organization/locations/{id}
     return this.http.get<Location>(`${this.apiURL}/${id}`);
   }
 
-  // Nota: Se sua API não tiver DELETE implementado para locations, isso dará erro ao chamar.
   deleteLocation(id: number): Observable<any> {
     return this.http.delete(`${this.apiURL}/${id}`);
   }

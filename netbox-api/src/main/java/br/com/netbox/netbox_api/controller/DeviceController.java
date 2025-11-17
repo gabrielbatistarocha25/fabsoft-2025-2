@@ -8,9 +8,10 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 
+//@CrossOrigin("https://glowing-bassoon-v65944vpw9j73x9g-4200.app.github.dev/")
 @RestController
 @RequestMapping("/api")
 public class DeviceController {

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
-// Importe TODOS os seus componentes
+import { HomeComponent } from './home/home.component'; 
+
 import { LocationComponent } from './location/location.component';
 import { FormLocationComponent } from './form-location/form-location.component';
 import { ManufacturerComponent } from './manufacturer/manufacturer.component';
@@ -17,6 +18,9 @@ import { DeviceComponent } from './device/device.component';
 import { FormDeviceComponent } from './form-device/form-device.component';
 
 export const routes: Routes = [
+  // Rota Home
+  { path: 'home', component: HomeComponent },
+
   // Location
   { path: 'locations', component: LocationComponent },
   { path: 'locations/novo', component: FormLocationComponent },
@@ -52,6 +56,6 @@ export const routes: Routes = [
   { path: 'devices/novo', component: FormDeviceComponent },
   { path: 'devices/alterar/:id', component: FormDeviceComponent },
 
-  // Rota Padrão
-  { path: '', redirectTo: 'locations', pathMatch: 'full' }
+  // Rota Padrão (agora aponta para home)
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

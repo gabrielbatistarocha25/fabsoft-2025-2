@@ -14,31 +14,27 @@ import { DeviceModelService } from '../service/device-model.service';
 @Component({
   selector: 'app-form-device',
   standalone: true,
-  imports: [CommonModule, FormsModule], // <-- Note que formulários precisam de CommonModule e FormsModule
+  imports: [CommonModule, FormsModule],
   templateUrl: './form-device.component.html',
   styleUrls: ['./form-device.component.css']
 })
 export class FormDeviceComponent implements OnInit {
   
-  // PARTE QUE FALTOU VOCÊ COPIAR:
   device: Device = new Device();
   sites: Site[] = [];
   racks: Rack[] = [];
   deviceModels: DeviceModel[] = [];
   
   constructor(
-    // PARTE QUE FALTOU VOCÊ COPIAR:
     private deviceService: DeviceService,
     private siteService: SiteService,
     private rackService: RackService,
     private deviceModelService: DeviceModelService,
-    
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // Carrega todos os dropdowns
     this.siteService.getSites().subscribe(data => this.sites = data);
     this.rackService.getRacks().subscribe(data => this.racks = data);
     this.deviceModelService.getDeviceModels().subscribe(data => this.deviceModels = data);

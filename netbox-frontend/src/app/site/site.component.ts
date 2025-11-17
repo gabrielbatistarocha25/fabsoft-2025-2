@@ -28,11 +28,14 @@ export class SiteComponent implements OnInit {
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
   }
 
-  carregarLista() { this.service.getSites().subscribe(data => this.lista = data); }
+  carregarLista() { 
+    this.service.getSites().subscribe(data => this.lista = data); 
+  }
   novo() { this.router.navigate(['/sites/novo']); }
   alterar(item: Site) { this.router.navigate(['/sites/alterar', item.id]); }
   abrirConfirmacao(item: Site) { this.selecionado = item; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteSite(this.selecionado.id).subscribe(() => {
       this.carregarLista();

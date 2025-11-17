@@ -22,11 +22,16 @@ export class DeviceComponent implements OnInit {
   
   ngOnInit(): void { this.carregarLista(); }
   ngAfterViewInit(): void { this.modal = new bootstrap.Modal(this.modalElement.nativeElement); }
-  carregarLista() { this.service.getDevices().subscribe(data => this.lista = data); }
+  
+  carregarLista() { 
+    this.service.getDevices().subscribe(data => this.lista = data); 
+  }
+
   novo() { this.router.navigate(['/devices/novo']); }
   alterar(item: Device) { this.router.navigate(['/devices/alterar', item.id]); }
   abrirConfirmacao(item: Device) { this.selecionado = item; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteDevice(this.selecionado.id).subscribe(() => {
       this.carregarLista();

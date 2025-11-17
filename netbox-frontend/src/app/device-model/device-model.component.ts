@@ -8,7 +8,7 @@ import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-device-model',
   standalone: true,
-  imports: [CommonModule], // <-- E ADICIONE AQUI
+  imports: [CommonModule],
   templateUrl: './device-model.component.html',
   styleUrls: ['./device-model.component.css']
 })
@@ -24,16 +24,18 @@ export class DeviceModelComponent implements OnInit {
     this.carregarLista(); 
   }
   
-  // CORREÇÃO: Mova a inicialização do modal para esta função
   ngAfterViewInit(): void { 
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement); 
   }
 
-  carregarLista() { this.service.getDeviceModels().subscribe(data => this.lista = data); }
+  carregarLista() { 
+    this.service.getDeviceModels().subscribe(data => this.lista = data); 
+  }
   novo() { this.router.navigate(['/device-models/novo']); }
   alterar(item: DeviceModel) { this.router.navigate(['/device-models/alterar', item.id]); }
   abrirConfirmacao(item: DeviceModel) { this.selecionado = item; this.modal.show(); }
   fecharConfirmacao() { this.modal.hide(); }
+  
   confirmarExclusao() {
     this.service.deleteDeviceModel(this.selecionado.id).subscribe(() => {
       this.carregarLista();
