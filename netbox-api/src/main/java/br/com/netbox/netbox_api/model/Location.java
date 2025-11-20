@@ -1,6 +1,6 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Location {
     private String address;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("location-sites")
+    @JsonIgnore
     private List<Site> sites;
 
     public Long getId() { return id; }

@@ -1,6 +1,5 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,9 +11,8 @@ public class Vlan {
     private Integer vlanId;
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "site_id")
-    @JsonBackReference("site-vlans")
     private Site site;
     
     public Long getId() { return id; }

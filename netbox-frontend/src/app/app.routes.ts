@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-
 import { HomeComponent } from './home/home.component'; 
-
+import { PrefixComponent } from './prefix/prefix.component';
+import { FormPrefixComponent } from './form-prefix/form-prefix.component';
+import { IpAddressComponent } from './ip-address/ip-address.component';
+import { FormIpAddressComponent } from './form-ip-address/form-ip-address.component';
 import { LocationComponent } from './location/location.component';
 import { FormLocationComponent } from './form-location/form-location.component';
 import { ManufacturerComponent } from './manufacturer/manufacturer.component';
@@ -17,45 +19,39 @@ import { FormDeviceModelComponent } from './form-device-model/form-device-model.
 import { DeviceComponent } from './device/device.component';
 import { FormDeviceComponent } from './form-device/form-device.component';
 
+
 export const routes: Routes = [
-  // Rota Home
   { path: 'home', component: HomeComponent },
 
-  // Location
   { path: 'locations', component: LocationComponent },
   { path: 'locations/novo', component: FormLocationComponent },
   { path: 'locations/alterar/:id', component: FormLocationComponent },
-
-  // Site
   { path: 'sites', component: SiteComponent },
   { path: 'sites/novo', component: FormSiteComponent },
   { path: 'sites/alterar/:id', component: FormSiteComponent },
-
-  // Manufacturer
   { path: 'manufacturers', component: ManufacturerComponent },
   { path: 'manufacturers/novo', component: FormManufacturerComponent },
   { path: 'manufacturers/alterar/:id', component: FormManufacturerComponent },
-
-  // Rack
   { path: 'racks', component: RackComponent },
   { path: 'racks/novo', component: FormRackComponent },
   { path: 'racks/alterar/:id', component: FormRackComponent },
-
-  // Vlan
   { path: 'vlans', component: VlanComponent },
   { path: 'vlans/novo', component: FormVlanComponent },
   { path: 'vlans/alterar/:id', component: FormVlanComponent },
-
-  // DeviceModel
   { path: 'device-models', component: DeviceModelComponent },
   { path: 'device-models/novo', component: FormDeviceModelComponent },
   { path: 'device-models/alterar/:id', component: FormDeviceModelComponent },
-
-  // Device
   { path: 'devices', component: DeviceComponent },
   { path: 'devices/novo', component: FormDeviceComponent },
   { path: 'devices/alterar/:id', component: FormDeviceComponent },
 
-  // Rota Padrão (agora aponta para home)
+  { path: 'prefixes', component: PrefixComponent },
+  { path: 'prefixes/novo', component: FormPrefixComponent },
+  { path: 'prefixes/alterar/:id', component: FormPrefixComponent },
+  
+  { path: 'ip-addresses', component: IpAddressComponent },
+  { path: 'ip-addresses/novo', component: FormIpAddressComponent },
+  { path: 'ip-addresses/alterar/:id', component: FormIpAddressComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -1,6 +1,6 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class Manufacturer {
     private String name;
 
     @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("manufacturer-models")
+    @JsonIgnore
     private List<DeviceModel> deviceModels;
 
     public Long getId() { return id; }
@@ -22,4 +22,3 @@ public class Manufacturer {
     public List<DeviceModel> getDeviceModels() { return deviceModels; }
     public void setDeviceModels(List<DeviceModel> deviceModels) { this.deviceModels = deviceModels; }
 }
-

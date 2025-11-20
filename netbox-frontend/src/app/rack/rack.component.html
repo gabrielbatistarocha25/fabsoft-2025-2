@@ -2,13 +2,26 @@
   <h2>Racks</h2>
   <button class="btn btn-primary mb-3" (click)="novo()">Novo Rack</button>
   <table class="table table-striped table-hover">
-    <thead> <tr> <th>ID</th> <th>Nome</th> <th>Altura (U)</th> <th>Site</th> <th>Ações</th> </tr> </thead>
+    <thead> 
+      <tr> 
+        <th>ID</th> 
+        <th>Nome</th> 
+        <th>Altura (U)</th> 
+        <th>Site (Localização)</th> 
+        <th>Ações</th> 
+      </tr> 
+    </thead>
     <tbody>
       <tr *ngFor="let item of lista">
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.uHeight }}</td>
-        <td>{{ item.site?.name || 'N/A' }}</td> 
+        <td>
+          {{ item.site?.name || 'N/A' }} 
+          <span *ngIf="item.site?.location" class="text-muted">
+            ({{ item.site?.location?.name }})
+          </span>
+        </td> 
         <td>
           <button (click)="alterar(item)" class="btn btn-sm btn-warning me-2">Alterar</button>
           <button (click)="abrirConfirmacao(item)" class="btn btn-sm btn-danger">Excluir</button>

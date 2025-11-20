@@ -6,10 +6,10 @@
       <tr> 
         <th>ID</th> 
         <th>Nome</th> 
-        <th>Site</th> 
-        <th>Rack</th> 
+        <th>Site (Localização)</th> 
+        <th>Rack (Site)</th> 
         <th>Pos (U)</th> 
-        <th>Modelo</th> 
+        <th>Modelo (Fabricante)</th> 
         <th>Ações</th> 
       </tr> 
     </thead>
@@ -17,10 +17,25 @@
       <tr *ngFor="let item of lista">
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
-        <td>{{ item.site?.name || 'N/A' }}</td> 
-        <td>{{ item.rack?.name || 'N/A' }}</td> 
+        <td>
+          {{ item.site?.name || 'N/A' }}
+          <span *ngIf="item.site?.location" class="text-muted">
+            ({{ item.site?.location?.name }})
+          </span>
+        </td> 
+        <td>
+          {{ item.rack?.name || 'N/A' }}
+          <span *ngIf="item.rack?.site" class="text-muted">
+             ({{ item.rack?.site?.name }})
+          </span>
+        </td> 
         <td>{{ item.position || '-' }}</td> 
-        <td>{{ item.deviceModel?.name || 'N/A' }}</td> 
+        <td>
+          {{ item.deviceModel?.name || 'N/A' }}
+          <span *ngIf="item.deviceModel?.manufacturer" class="text-muted">
+             ({{ item.deviceModel?.manufacturer?.name }})
+          </span>
+        </td> 
         <td>
           <button (click)="alterar(item)" class="btn btn-sm btn-warning me-2">Alterar</button>
           <button (click)="abrirConfirmacao(item)" class="btn btn-sm btn-danger">Excluir</button>

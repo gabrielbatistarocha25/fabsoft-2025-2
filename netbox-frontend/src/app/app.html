@@ -1,34 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">Netbox</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <a class="navbar-brand" routerLink="/home" (click)="fecharMenu()">Clone NetBox</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         
         <li class="nav-item">
-          <a class="nav-link" routerLink="/locations" routerLinkActive="active">Localizações</a>
+          <a class="nav-link" routerLink="/locations" routerLinkActive="active" (click)="fecharMenu()">Localizações</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sites" routerLinkActive="active">Sites</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/racks" routerLinkActive="active">Racks</a>
+          <a class="nav-link" routerLink="/sites" routerLinkActive="active" (click)="fecharMenu()">Sites</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/vlans" routerLinkActive="active">VLANs</a>
-        </li>
-       
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/devices" routerLinkActive="active">Dispositivos</a>
+          <a class="nav-link" routerLink="/racks" routerLinkActive="active" (click)="fecharMenu()">Racks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/device-models" routerLinkActive="active">Modelos</a>
+          <a class="nav-link" routerLink="/manufacturers" routerLinkActive="active" (click)="fecharMenu()">Fabricantes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/manufacturers" routerLinkActive="active">Fabricantes</a>
+          <a class="nav-link" routerLink="/device-models" routerLinkActive="active" (click)="fecharMenu()">Modelos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/devices" routerLinkActive="active" (click)="fecharMenu()">Dispositivos</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vlans" routerLinkActive="active" (click)="fecharMenu()">VLANs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/prefixes" routerLinkActive="active" (click)="fecharMenu()">Redes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/ip-addresses" routerLinkActive="active" (click)="fecharMenu()">IPs</a>
         </li>
 
       </ul>

@@ -14,7 +14,9 @@
         <label for="site" class="form-label">Site</label>
         <select class="form-select" id="site" [(ngModel)]="rack.site.id" name="site">
           <option [ngValue]="null">Selecione um Site</option>
-          <option *ngFor="let item of sites" [value]="item.id">{{ item.name }}</option>
+          <option *ngFor="let item of sites" [value]="item.id">
+            {{ item.name }} ({{ item.location?.name || 'Sem Localização' }})
+          </option>
         </select>
       </div>
     </div>

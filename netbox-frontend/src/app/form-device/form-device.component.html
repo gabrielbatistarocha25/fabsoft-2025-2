@@ -12,7 +12,9 @@
         <label for="site" class="form-label">Site</label>
         <select class="form-select" id="site" [(ngModel)]="device.site.id" name="site" required>
           <option [ngValue]="null">Selecione um Site</option>
-          <option *ngFor="let item of sites" [value]="item.id">{{ item.name }}</option>
+          <option *ngFor="let item of sites" [value]="item.id">
+            {{ item.name }} ({{ item.location?.name || 'Sem Localização' }})
+          </option>
         </select>
       </div>
 
@@ -20,7 +22,9 @@
         <label for="deviceModel" class="form-label">Modelo</label>
         <select class="form-select" id="deviceModel" [(ngModel)]="device.deviceModel.id" name="deviceModel" required>
           <option [ngValue]="null">Selecione um Modelo</option>
-          <option *ngFor="let item of deviceModels" [value]="item.id">{{ item.manufacturer.name }} - {{ item.name }}</option>
+          <option *ngFor="let item of deviceModels" [value]="item.id">
+            {{ item.name }} ({{ item.manufacturer?.name || 'N/A' }})
+          </option>
         </select>
       </div>
 
@@ -28,7 +32,9 @@
         <label for="rack" class="form-label">Rack (Opcional)</label>
         <select class="form-select" id="rack" [(ngModel)]="device.rack.id" name="rack">
           <option [ngValue]="null">Nenhum (Fora do Rack)</option>
-          <option *ngFor="let item of racks" [value]="item.id">{{ item.name }}</option>
+          <option *ngFor="let item of racks" [value]="item.id">
+            {{ item.name }} ({{ item.site?.name || 'N/A' }})
+          </option>
         </select>
       </div>
 

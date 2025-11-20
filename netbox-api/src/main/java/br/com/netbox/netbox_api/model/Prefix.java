@@ -1,33 +1,33 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-public class Rack {
+public class Prefix {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int uHeight;
+    
+    private String cidr;
+    private String name; 
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "site_id")
     private Site site;
 
-    @OneToMany(mappedBy = "rack")
-    @JsonIgnore
-    private List<Device> devices;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vlan_id")
+    private Vlan vlan;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    public String getCidr() { return cidr; }
+    public void setCidr(String cidr) { this.cidr = cidr; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public int getuHeight() { return uHeight; }
-    public void setuHeight(int uHeight) { this.uHeight = uHeight; }
     public Site getSite() { return site; }
     public void setSite(Site site) { this.site = site; }
-    public List<Device> getDevices() { return devices; }
-    public void setDevices(List<Device> devices) { this.devices = devices; }
+    public Vlan getVlan() { return vlan; }
+    public void setVlan(Vlan vlan) { this.vlan = vlan; }
 }

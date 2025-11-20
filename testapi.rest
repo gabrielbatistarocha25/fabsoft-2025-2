@@ -1,115 +1,140 @@
-@baseUrl = http://localhost:8080/api
+@baseUrl = https://glowing-bassoon-v65944vpw9j73x9g-8080.app.github.dev
 
-# Teste 1.1: Criar a Localização Física (Location)
-POST {{baseUrl}}/organization/locations
+### --- ORGANIZATION (Location & Sites) ---
+
+### Criar Location
+POST {{baseUrl}}/api/organization/locations
 Content-Type: application/json
 
 {
-    "name": "Data Center Principal - Joinville",
-    "address": "Rua das Máquinas, 123, Joinville"
+  "name": "Matriz Joinville",
+  "address": "Rua Dona Francisca, 8300"
 }
 
-###
-# Teste 1.2: Criar o Site
-POST {{baseUrl}}/organization/sites
+### Listar Locations
+GET {{baseUrl}}/api/organization/locations
+
+### Criar Site (Vinculado a Location 1)
+POST {{baseUrl}}/api/organization/sites
 Content-Type: application/json
 
 {
-    "name": "JVE-MATRIZ-01",
-    "location": {
-        "id": 1
-    }
+  "name": "Data Center Principal",
+  "location": { "id": 1 }
 }
 
-###
-# Teste 2.1: Criar um Fabricante (Manufacturer)
-POST {{baseUrl}}/manufacturers
+### Listar Sites
+GET {{baseUrl}}/api/organization/sites
+
+
+### --- INFRASTRUCTURE (Racks) ---
+
+### Criar Rack (Vinculado ao Site 1)
+POST {{baseUrl}}/api/racks
 Content-Type: application/json
 
 {
-    "name": "Cisco"
+  "name": "Rack Servidores A",
+  "uHeight": 42,
+  "site": { "id": 1 }
 }
 
-###
-# Teste 2.2: Criar um Modelo de Dispositivo (Device Model)
-POST {{baseUrl}}/device-models
+### Listar Racks
+GET {{baseUrl}}/api/racks
+
+
+### --- HARDWARE (Manufacturers & Models) ---
+
+### Criar Fabricante
+POST {{baseUrl}}/api/manufacturers
 Content-Type: application/json
 
 {
-    "name": "Catalyst 9300",
-    "manufacturer": {
-        "id": 1
-    }
+  "name": "Cisco"
 }
 
-###
-# Teste 3.1: Criar um Rack
-POST {{baseUrl}}/racks
+### Criar Modelo (Vinculado ao Fabricante 1)
+POST {{baseUrl}}/api/device-models
 Content-Type: application/json
 
 {
-    "name": "RACK-A01",
-    "uHeight": 42,
-    "site": {
-        "id": 1
-    }
+  "name": "Catalyst 9200",
+  "manufacturer": { "id": 1 }
 }
 
-###
-# Teste 3.2: Criar uma VLAN
-POST {{baseUrl}}/vlans
+
+### --- DEVICES (Ativos) ---
+
+### Criar Dispositivo (Vinculado a Site 1, Rack 1 e Modelo 1)
+POST {{baseUrl}}/api/devices
 Content-Type: application/json
 
 {
-    "name": "VLAN-SERVIDORES-PROD",
-    "vlanId": 10,
-    "site": {
-        "id": 1
-    }
+  "name": "Switch-Core-01",
+  "position": 40,
+  "site": { "id": 1 },
+  "rack": { "id": 1 },
+  "deviceModel": { "id": 1 }
 }
 
-###
-# Teste 4.1: Criar um Dispositivo (Device)
-POST {{baseUrl}}/devices
+### Listar Dispositivos
+GET {{baseUrl}}/api/devices
+
+
+### --- IPAM (Vlans, Redes/Prefixos, IPs) ---
+
+### Criar VLAN (Vinculada ao Site 1)
+POST {{baseUrl}}/api/vlans
 Content-Type: application/json
 
 {
-    "name": "SW-CORE-01",
-    "site": {
-        "id": 1
-    },
-    "deviceModel": {
-        "id": 1
-    },
-    "rack": {
-        "id": 1
-    },
-    "position": 20
+  "name": "VLAN Dados",
+  "vlanId": 10,
+  "site": { "id": 1 }
 }
 
-###
-# Teste 5.1: Consultar Dispositivos de um Site
-GET {{baseUrl}}/sites/1/devices
+### --- NOVOS TESTES DE IPAM (Redes e IPs) ---
 
-###
-# Teste 5.2: Testar Erro de "Não Encontrado" (404)
-POST {{baseUrl}}/racks
+### 1. Criar Rede (Prefixo)
+# Vinculada ao Site 1 e VLAN 1
+POST {{baseUrl}}/api/ipam/prefixes
 Content-Type: application/json
 
 {
-    "name": "RACK-DO-GOOGLE",
-    "uHeight": 42,
-    "site": {
-        "id": 999
-    }
+  "cidr": "192.168.10.0/24",
+  "name": "Rede Dados Escritorio",
+  "site": { "id": 1 },
+  "vlan": { "id": 1 }
 }
 
-###
-# Teste 5.3: Testar Erro de "Requisição Inválida" (400)
-POST {{baseUrl}}/vlans
+### 2. Listar Redes
+GET {{baseUrl}}/api/ipam/prefixes
+
+### 3. Criar Endereço IP
+# Vinculado ao Dispositivo 1
+POST {{baseUrl}}/api/ipam/ip-addresses
 Content-Type: application/json
 
 {
-    "vlanId": 99,
-    "name": "VLAN-SEM-SITE"
+  "address": "192.168.10.1/24",
+  "status": "Active",
+  "dnsName": "gw-switch-core.local",
+  "device": { "id": 1 }
 }
+
+### 4. Listar IPs
+GET {{baseUrl}}/api/ipam/ip-addresses
+
+### 5. Atualizar IP (Mudar status)
+PUT {{baseUrl}}/api/ipam/ip-addresses/1
+Content-Type: application/json
+
+{
+  "address": "192.168.10.1/24",
+  "status": "Reserved",
+  "dnsName": "gw-switch-core.local",
+  "device": { "id": 1 }
+}
+
+### 6. Excluir IP
+DELETE {{baseUrl}}/api/ipam/ip-addresses/1

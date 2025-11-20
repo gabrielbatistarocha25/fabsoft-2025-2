@@ -1,7 +1,6 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -13,13 +12,12 @@ public class DeviceModel {
     private Long id;
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manufacturer_id")
-    @JsonBackReference("manufacturer-models")
     private Manufacturer manufacturer;
 
     @OneToMany(mappedBy = "deviceModel")
-    @JsonManagedReference("model-devices")
+    @JsonIgnore
     private List<Device> devices;
 
     public Long getId() { return id; }
@@ -31,4 +29,3 @@ public class DeviceModel {
     public List<Device> getDevices() { return devices; }
     public void setDevices(List<Device> devices) { this.devices = devices; }
 }
-

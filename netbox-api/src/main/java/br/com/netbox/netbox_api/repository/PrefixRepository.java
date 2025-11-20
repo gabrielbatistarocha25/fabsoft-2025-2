@@ -1,0 +1,9 @@
+package br.com.netbox.netbox_api.repository;
+
+import br.com.netbox.netbox_api.model.Prefix;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PrefixRepository extends JpaRepository<Prefix, Long> {
+}

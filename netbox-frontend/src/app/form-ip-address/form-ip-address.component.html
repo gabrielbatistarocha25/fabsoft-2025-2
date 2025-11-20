@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2>{{ ip.id ? 'Editar' : 'Novo' }} Endereço IP</h2>
+  <div class="card">
+    <div class="card-body">
+      
+      <div class="mb-3">
+        <label for="address" class="form-label">Endereço IP (com máscara)</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="ip.address" name="address" placeholder="Ex: 192.168.1.10/24">
+      </div>
+
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" [(ngModel)]="ip.status" name="status">
+          <option value="Active">Ativo</option>
+          <option value="Reserved">Reservado</option>
+          <option value="DHCP">DHCP</option>
+          <option value="Deprecated">Descontinuado</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="device" class="form-label">Dispositivo (Atribuído a)</label>
+        <select class="form-select" id="device" [(ngModel)]="ip.device.id" name="device">
+          <option [ngValue]="null">Nenhum (IP Solto)</option>
+          <option *ngFor="let item of devices" [value]="item.id">
+            {{ item.name }} ({{ item.site?.name || 'N/A' }})
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="dnsName" class="form-label">Nome DNS</label>
+        <input type="text" class="form-control" id="dnsName" [(ngModel)]="ip.dnsName" name="dnsName">
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success me-2" (click)="salvar()">Salvar</button>
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>

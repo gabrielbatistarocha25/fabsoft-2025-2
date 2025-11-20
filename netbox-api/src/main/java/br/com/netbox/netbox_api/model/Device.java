@@ -1,6 +1,5 @@
 package br.com.netbox.netbox_api.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,19 +11,16 @@ public class Device {
     private String name;
     private Integer position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "site_id")
-    @JsonBackReference("site-devices")
     private Site site;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rack_id")
-    @JsonBackReference("rack-devices")
     private Rack rack;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "devicemodel_id")
-    @JsonBackReference("model-devices")
     private DeviceModel deviceModel;
 
     public Long getId() { return id; }

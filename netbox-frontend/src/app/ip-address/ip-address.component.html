@@ -1,27 +1,29 @@
 <div class="container mt-4">
-  <h2>VLANs</h2>
-  <button class="btn btn-primary mb-3" (click)="novo()">Nova VLAN</button>
+  <h2>Endereços IP</h2>
+  <button class="btn btn-primary mb-3" (click)="novo()">Novo IP</button>
   <table class="table table-striped table-hover">
     <thead> 
       <tr> 
         <th>ID</th> 
-        <th>Nome</th> 
-        <th>VLAN ID</th> 
-        <th>Site (Localização)</th> 
+        <th>Endereço</th> 
+        <th>Status</th> 
+        <th>Dispositivo</th> 
+        <th>DNS</th> 
         <th>Ações</th> 
       </tr> 
     </thead>
     <tbody>
       <tr *ngFor="let item of lista">
         <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.vlanId }}</td>
+        <td>{{ item.address }}</td>
+        <td><span class="badge bg-info">{{ item.status }}</span></td>
         <td>
-          {{ item.site?.name || 'N/A' }}
-          <span *ngIf="item.site?.location" class="text-muted">
-            ({{ item.site?.location?.name }})
+          {{ item.device?.name || 'Livre' }}
+          <span *ngIf="item.device?.site" class="text-muted">
+             ({{ item.device?.site?.name }})
           </span>
-        </td> 
+        </td>
+        <td>{{ item.dnsName }}</td>
         <td>
           <button (click)="alterar(item)" class="btn btn-sm btn-warning me-2">Alterar</button>
           <button (click)="abrirConfirmacao(item)" class="btn btn-sm btn-danger">Excluir</button>
@@ -33,8 +35,8 @@
 <div class="modal fade" #deleteModal tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header"> <h5 class="modal-title">Excluir VLAN</h5> </div>
-      <div class="modal-body"> Confirma a exclusão de <strong>{{ selecionado?.name }}</strong>? </div>
+      <div class="modal-header"> <h5 class="modal-title">Excluir IP</h5> </div>
+      <div class="modal-body"> Confirma a exclusão de <strong>{{ selecionado?.address }}</strong>? </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="fecharConfirmacao()">Cancelar</button>
         <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Excluir</button>

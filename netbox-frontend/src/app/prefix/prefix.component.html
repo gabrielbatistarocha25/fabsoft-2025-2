@@ -1,27 +1,27 @@
 <div class="container mt-4">
-  <h2>VLANs</h2>
-  <button class="btn btn-primary mb-3" (click)="novo()">Nova VLAN</button>
+  <h2>Redes</h2>
+  <button class="btn btn-primary mb-3" (click)="novo()">Nova Rede</button>
   <table class="table table-striped table-hover">
     <thead> 
       <tr> 
         <th>ID</th> 
+        <th>Rede (CIDR)</th> 
         <th>Nome</th> 
-        <th>VLAN ID</th> 
-        <th>Site (Localização)</th> 
+        <th>Site</th> 
+        <th>VLAN</th> 
         <th>Ações</th> 
       </tr> 
     </thead>
     <tbody>
       <tr *ngFor="let item of lista">
         <td>{{ item.id }}</td>
+        <td>{{ item.cidr }}</td>
         <td>{{ item.name }}</td>
-        <td>{{ item.vlanId }}</td>
+        <td>{{ item.site?.name || '-' }}</td>
         <td>
-          {{ item.site?.name || 'N/A' }}
-          <span *ngIf="item.site?.location" class="text-muted">
-            ({{ item.site?.location?.name }})
-          </span>
-        </td> 
+          {{ item.vlan?.name || '-' }}
+          <span *ngIf="item.vlan?.vlanId" class="text-muted"> (ID: {{ item.vlan?.vlanId }})</span>
+        </td>
         <td>
           <button (click)="alterar(item)" class="btn btn-sm btn-warning me-2">Alterar</button>
           <button (click)="abrirConfirmacao(item)" class="btn btn-sm btn-danger">Excluir</button>
@@ -33,8 +33,8 @@
 <div class="modal fade" #deleteModal tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header"> <h5 class="modal-title">Excluir VLAN</h5> </div>
-      <div class="modal-body"> Confirma a exclusão de <strong>{{ selecionado?.name }}</strong>? </div>
+      <div class="modal-header"> <h5 class="modal-title">Excluir Rede</h5> </div>
+      <div class="modal-body"> Confirma a exclusão de <strong>{{ selecionado?.cidr }}</strong>? </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="fecharConfirmacao()">Cancelar</button>
         <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Excluir</button>
